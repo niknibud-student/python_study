@@ -2,7 +2,7 @@
 Изучение Python по различным источникам
 
 ### Функция проверки на простоту
-Взял отсюда: [Проверка числа на простоту в Python] (https://foxford.ru/wiki/informatika/proverka-chisla-na-prostotu-v-python)
+Взял отсюда: [Проверка числа на простоту в Python](https://foxford.ru/wiki/informatika/proverka-chisla-na-prostotu-v-python)
 ```python
 def isPrime(n):
     if n % 2 == 0:
