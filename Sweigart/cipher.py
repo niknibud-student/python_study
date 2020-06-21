@@ -1,7 +1,6 @@
 SYMBOLS = 'АБВГДЕЁЖЗИЙКЛМНОПТСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 MAX_KEY_SIZE = len(SYMBOLS)
 
-
 def getMode():
     while True:
         print('Вы хотите зашифровать (1) или расшифровать (2) текст? Введите 1 или 2.')
@@ -20,7 +19,8 @@ def getKey():
     while True:
         print('Введите ключ шифрования (1 - %s)' % MAX_KEY_SIZE)
         key = int(input())
-        if key >= 1 and key <= MAX_KEY_SIZE:
+
+        if (key >= 1 and key <= MAX_KEY_SIZE):
             return key
 
 def getTranslateMessage(mode, mesage, key):
