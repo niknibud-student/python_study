@@ -41,3 +41,7 @@ if arr[2] < arr[0] + arr[1]:
 else:
     print(-1)
 ```
+### Сортировка чисел по сумме их цифр
+```python
+print(*sorted(input().split(), key=lambda x: sum([int(i) for i in x])))
+```
