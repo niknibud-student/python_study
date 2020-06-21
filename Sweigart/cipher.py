@@ -3,12 +3,12 @@ MAX_KEY_SIZE = len(SYMBOLS)
 
 def getMode():
     while True:
-        print('Вы хотите зашифровать (1) или расшифровать (2) текст? Введите 1 или 2.')
+        print('Вы хотите зашифровать (1), расшифровать (2) или взломать (3) текст? Введите 1, 2 или 3.')
         mode = int(input())
-        if mode in [1, 2]:
+        if mode in [1, 2, 3]:
             return mode
         else:
-            print('Введите 1 или 2!')
+            print('Введите 1, 2 или 3!')
 
 def getMessage():
     print('Введите текст:')
@@ -37,18 +37,24 @@ def getTranslateMessage(mode, mesage, key):
             # Зашифровать или расшифровать
             symbolIndex += key
 
-        if symbolIndex >= len(SYMBOLS):
-            symbolIndex -= len(SYMBOLS)
-        elif symbolIndex < 0:
-            symbolIndex += len(SYMBOLS)
+            if symbolIndex >= len(SYMBOLS):
+                symbolIndex -= len(SYMBOLS)
+            elif symbolIndex < 0:
+                symbolIndex += len(SYMBOLS)
 
-        translated += SYMBOLS[symbolIndex]
+            translated += SYMBOLS[symbolIndex]
 
     return translated
 
 mode = getMode()
 message = getMessage()
-key = getKey()
+
+if mode != 3:
+    key = getKey()
 
 print('Преобразованный текст:')
-print(getTranslateMessage(mode, message, key))
+if mode != 3:
+    print(getTranslateMessage(mode, message, key))
+else:
+    for key in range(1, MAX_KEY_SIZE + 1):
+        print(key, getTranslateMessage(2, message, key))
