@@ -67,8 +67,17 @@ def tap(x, y):
 
 
 def choose_difficalty():
-    n = 4
-    m = 4
+    print("Выберите сложность (1, 2 или 3):\n 1 Лёгкий \n 2 Средний \n 3 Сложный ")
+    answer = int(input())
+    if answer == 1:
+        n, m = 4, 2
+    elif answer == 2:
+        n, m = 6, 4
+    elif answer == 3:
+        n, m = 8, 6
+    else:
+        print('Некорректный ответ')
+        n, m = 0, 0
     return n, m
 
 
