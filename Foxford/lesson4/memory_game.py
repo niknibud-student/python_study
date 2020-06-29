@@ -21,11 +21,12 @@ def show(x, y):
         canvas.itemconfigure(number_of_moves, text='Количество шагов: ' + str(moves))
         label1 = Label(text='Количество шагов: ' + str(moves)).grid(column=0, row=3)
         root.update()
-        
+
 
 # todo Заменить название на flip_back
 def close():
-    pass
+    buttons[previousX, previousY]['text'] = ''
+    buttons[x, y]['text'] = ''
 
 
 def the_same_button(x, y):
@@ -33,7 +34,7 @@ def the_same_button(x, y):
 
 
 def buttons_are_guessed(x, y):
-    pass
+    return True if buttons[previousX, previousY]['text'] == buttons[x, y]['text'] else False
 
 
 def stay_opened(x, y):
