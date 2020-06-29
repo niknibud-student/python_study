@@ -24,13 +24,15 @@ def show(x, y):
 
 
 # todo Заменить название на flip_back
-def close():
+def close(x, y, previousX, previousY):
     buttons[previousX, previousY]['text'] = ''
     buttons[x, y]['text'] = ''
 
 
 def the_same_button(x, y):
-    pass
+    global previousY, previousY
+    return False if previousX != x or previousY != y else True
+
 
 
 def buttons_are_guessed(x, y):
@@ -38,7 +40,12 @@ def buttons_are_guessed(x, y):
 
 
 def stay_opened(x, y):
-    pass
+    global number_of_guessed_pairs
+    buttons[previousX, previousY]['command'] = DISABLED
+    buttons[x, y]['command'] = DISABLED
+    number_of_guessed_pairs += 1
+    if number_of_guessed_pairs == number_of_pairs:
+        messagebox.showinfo('Количество ходов', 'Сделано ходов: ' + str(moves), command=close_window(root))
 
 
 # Основная функция переворота карточек
