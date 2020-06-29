@@ -8,23 +8,22 @@ def close_window(self):
 
 
 # Перевернуть карточку
-# todo Заменить название на flip_over
-def show(x, y):
-    global first, previousX, previousY, moves, label1
+def flip_over(x, y):
+    global first, previousX, previousY, attempts
     buttons[x, y]['text'] = button_symbols[x, y]
 
     if first:
         previousX = x
         previousY = y
     else:
-        moves += 1
-        canvas.itemconfigure(number_of_moves, text='Количество шагов: ' + str(moves))
-        label1 = Label(text='Количество шагов: ' + str(moves)).grid(column=0, row=3)
+        attempts += 1
+        canvas.itemconfigure(number_of_attempts, text='Количество шагов: ' + str(attempts))
+        Label(text='Количество шагов: ' + str(attempts)).grid(column=0, row=3)
         root.update()
 
 
-# todo Заменить название на flip_back
-def close(x, y, previousX, previousY):
+# Перевернуть карточки, если не угадал
+def flip_back(x, y, previousX, previousY):
     buttons[previousX, previousY]['text'] = ''
     buttons[x, y]['text'] = ''
 
@@ -45,7 +44,7 @@ def stay_opened(x, y):
     buttons[x, y]['command'] = DISABLED
     number_of_guessed_pairs += 1
     if number_of_guessed_pairs == number_of_pairs:
-        messagebox.showinfo('Количество ходов', 'Сделано ходов: ' + str(moves), command=close_window(root))
+        messagebox.showinfo('Количество ходов', 'Сделано ходов: ' + str(attempts), command=close_window(root))
 
 
 # Основная функция переворота карточек
@@ -53,15 +52,15 @@ def tap(x, y):
     global first, previousX, previousY
 
     if first:
-        show(x, y)
+        flip_over(x, y)
         first = False
     else:
         if not the_same_button(x, y):
-            show(x, y)
+            flip_over(x, y)
             if buttons_are_guessed(x, y):
                 stay_opened(x, y)
             else:
-                root.after(500, close, x, y, previousX, previousY)
+                root.after(500, flip_back, x, y, previousX, previousY)
             first = True
             previousX, previousY = 0, 0
 
@@ -92,8 +91,7 @@ previousY = 0
 # Количество угаданных пар
 number_of_guessed_pairs = 0
 # Количество попыток
-# todo Заменить переменную на attemp
-moves = 0
+attempts = 0
 # Словарь связка кнопок с символами
 button_symbols = {}
 
@@ -125,9 +123,8 @@ canvas.grid(column=0, row=1)
 
 Label(text='Игра Мемори').grid(column=0, row=0)
 Label(text='Найдите пару одиноковых карточек').grid(column=0, row=2)
-label1 = Label(text=str(moves)).grid(column=0, row=3)
-
-number_of_moves = canvas.create_text(125, 10, text='Количество шагов: ' + str(moves))
+Label(text=str(attempts)).grid(column=0, row=3)
+number_of_attempts = canvas.create_text(125, 10, text='Количество шагов: ' + str(attempts))
 
 for i in range(1, n + 1):
     for j in range(1, m + 1):
