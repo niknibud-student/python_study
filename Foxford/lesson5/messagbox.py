@@ -1,4 +1,4 @@
-from tkinter import Tk, Entry, Label, Button
+from tkinter import Tk, Entry, Label, Button, END
 from tkinter import messagebox as mbox
 
 def check():
