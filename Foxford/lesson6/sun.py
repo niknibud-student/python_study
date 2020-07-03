@@ -14,17 +14,27 @@ def create_line_under_ungle(canvas, x, y, width, ungle, color, tag):
 
     return canvas.create_line(x, y, x2, y2, width=2, fill=color, tag=tag)
 
-def motion(tag):
-    canvas.move(tag, 10, -3)
-    #for sunray in sunrays:
-    #    canvas.move(sunray, 10, -3)
-    if canvas.coords(tag)[2] < 500:
-        root.after(1000, motion(tag))
+def motion(tag, dx, dy):
+    canvas.move(tag, dx, dy)
+    if canvas.coords(tag)[2]-40 < 125:
+        dy = -7
+    elif canvas.coords(tag)[2]-40 < 180:
+        dy = -5
+    elif canvas.coords(tag)[2]-40 < 250:
+        dy = -3
+    elif canvas.coords(tag)[2]-40 < 315:
+        dy = 3
+    elif canvas.coords(tag)[2]-40 < 375:
+        dy = 5
+    elif canvas.coords(tag)[2]-40 < 500:
+        dy = 7
+    if canvas.coords(tag)[2]-40 < 500:
+        root.after(100, motion, tag, dx, dy)
 
 
 # Начальные данные
 x = 0
-y = 150
+y = 250
 radius = 40
 color = 'orange'
 tag = 'sun'
@@ -41,6 +51,6 @@ for i in range(0, 360, 15):
 
 canvas.pack()
 
-motion(tag)
+motion(tag, 10, 7)
 
 root.mainloop()
